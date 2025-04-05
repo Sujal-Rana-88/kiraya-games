@@ -26,7 +26,13 @@ export default function Navbar() {
   const [unreadMessages, setUnreadMessages] = useState(0);
   const [unreadNotifications, setUnreadNotifications] = useState(0);
   const pathname = usePathname();
-  const imageUrl = localStorage.getItem("profilePicture");
+  const [imageUrl, setImageUrl] = useState<string | null>(null);
+
+  useEffect(() => {
+    // This code only runs on the client
+    const storedImage = localStorage.getItem("profilePicture");
+    setImageUrl(storedImage);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
