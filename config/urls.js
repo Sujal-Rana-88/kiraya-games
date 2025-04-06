@@ -1,5 +1,5 @@
 // const BASE_URL = 'https://rental-website-backend.onrender.com';
-const BASE_URL = 'http://localhost:5000';
+const BASE_URL = 'https://rental-website-backend-1.onrender.com';
 
 // Export all API endpoints as constants
 const API_URLS = {
