@@ -1,18 +1,25 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import API_URLS from "@/config/urls";
 import { toast } from "react-toastify";
 import Image from "next/image";
 
 const LendGame = () => {
-  const token = localStorage.getItem("token");
-  const userId = localStorage.getItem("user_id");
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const totalSteps = 4;
+  const [token, setStoredToken] = useState<string | null>(null);
+  const [userId, setUserId] = useState<string | null>(null);
 
+  useEffect(() => {
+    // This code only runs on the client
+    const value = localStorage.getItem('token');
+    const value1 = localStorage.getItem('user_id');
+    setStoredToken(value);
+    setUserId(value1);
+  }, []);
   const [formData, setFormData] = useState({
     gameName: "",
     lendingPeriod: "",

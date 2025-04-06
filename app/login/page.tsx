@@ -10,7 +10,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Label } from "@/components/ui/label";
 import { FcGoogle } from "react-icons/fc";
 import { toast } from "@/components/ui/use-toast";
-import jwtDecode from "jwt-decode"; // Import JWT decoder
+import {jwtDecode} from "jwt-decode"; // Import JWT decoder
 
 export default function LoginPage() {
   const [userName, setUserName] = useState("");
