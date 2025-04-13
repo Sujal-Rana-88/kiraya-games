@@ -121,7 +121,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center space-x-4">
             {!loading && user ? (
               <>
-                <Button variant="ghost" size="icon" className="relative" asChild>
+                {/* <Button variant="ghost" size="icon" className="relative" asChild>
                   <Link href="/chat">
                     <MessageCircle className="h-5 w-5" />
                     {unreadMessages > 0 && (
@@ -138,7 +138,7 @@ export default function Navbar() {
                       {unreadNotifications}
                     </Badge>
                   )}
-                </Button>
+                </Button> */}
                 <DropdownMenu>
                   <DropdownMenuTrigger asChild>
                     <Button
@@ -279,7 +279,7 @@ export default function Navbar() {
                         </Button>
                       </div>
                       <div className="grid grid-cols-2 gap-2">
-                        <Button
+                        {/* <Button
                           asChild
                           variant="outline"
                           className="w-full relative"
@@ -297,7 +297,7 @@ export default function Navbar() {
                           {unreadNotifications > 0 && (
                             <Badge className="ml-2">{unreadNotifications}</Badge>
                           )}
-                        </Button>
+                        </Button> */}
                       </div>
                       <Button className="w-full" onClick={handleLogout}>
                         Logout

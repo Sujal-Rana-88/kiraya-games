@@ -197,6 +197,47 @@ export default function ProfilePage() {
             });
         }
     };
+    const handleDelete = async () => {
+        try {
+            const userId = localStorage.getItem("user_id");
+    
+            // Ensure userId is not null or undefined
+            if (!userId) {
+                toast({
+                    title: "Error",
+                    description: "User ID not found. Please login again.",
+                    variant: "destructive",
+                });
+                return;
+            }
+    
+            const response = await axios.delete(
+                `${API_URLS.DELETE_ACCOUNT}?userId=${userId}` // Append userId as a query parameter
+            );
+    
+            if (response.status === 200) {
+                toast({
+                    title: "Success",
+                    description: "Account deleted successfully",
+                });
+                // Perform any necessary cleanup after successful deletion, e.g., clear localStorage, redirect
+            } else {
+                toast({
+                    title: "Error",
+                    description: `Failed to delete account: ${response.status} - ${response.statusText}`,
+                    variant: "destructive",
+                });
+            }
+        } catch (error: any) {
+            console.error("Error deleting user account:", error);
+            toast({
+                title: "Error Deleting user account:",
+                description: error.message || "Error deleting account. Please try again.",
+                variant: "destructive",
+            });
+        }
+    };
+    
 
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -372,6 +413,13 @@ export default function ProfilePage() {
                                     >
                                         Edit Profile
                                     </Button>
+                                    {/* <Button
+                                        variant="secondary"
+                                        className="w-full"
+                                        onClick={handleDelete}
+                                    >
+                                        Delete Account
+                                    </Button> */}
                                     <Button
                                         variant="destructive"
                                         className="w-full"

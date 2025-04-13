@@ -160,6 +160,7 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
   const loginWithGoogle = async () => {
     try {
       setLoading(true);
+  
       const result = await signInWithPopup(auth, googleProvider);
       const { displayName, email } = result.user;
       const idToken = await result.user.getIdToken();
@@ -185,41 +186,55 @@ export default function AuthProvider({ children }: { children: ReactNode }) {
         }),
       });
   
+      // Check the response status
       if (response.ok) {
         const data = await response.json();
   
         // Store user details
-        setLocalStorage("token", data.access_token),
-        setLocalStorage("user_id", data.userId),
-        setLocalStorage("user_name", data.userName),
-        setLocalStorage("email", data.email),
-        setLocalStorage("first_name", data.firstName),
-        setLocalStorage("last_name", data.lastName),
-        setLocalStorage("isAuthenticated", "true"),
-        setLocalStorage("profilePicture", data.profilePictureUrl || ""),
-        setLocalStorage("user", JSON.stringify(data)),
+        localStorage.setItem("token", data.access_token);
+        localStorage.setItem("user_id", data.userId);
+        localStorage.setItem("user_name", data.userName);
+        localStorage.setItem("email", data.email);
+        localStorage.setItem("first_name", data.firstName);
+        localStorage.setItem("last_name", data.lastName);
+        localStorage.setItem("isAuthenticated", "true");
+        localStorage.setItem("profilePicture", data.profilePictureUrl || "");
+        localStorage.setItem("user", JSON.stringify(data));
   
+        // Set user state
         setUser(data);
+  
+        // Redirect to home only on successful login
         router.push("/");
         toast.success("Logged in with Google successfully!");
+      } else {
+        const data = await response.json();
+  
+        // Handle specific status codes
+        if (response.status === 404) {
+          // Explicitly handle 404 errors
+          toast.error("Account doesn't exist. Redirecting to registration...");
+          localStorage.setItem("redirectToRegister", "true");
+  
+          // Redirect to /google after a brief delay
+          setTimeout(() => {
+            router.push("/google");
+          }, 3000);
+        } else {
+          throw new Error(data.message || "Login failed. Please try again.");
+        }
       }
     } catch (error: any) {
       console.error("Google login error:", error);
   
-      if (error.response?.status === 404) {
-        toast.error("Account doesn't exist. Redirecting to registration...");
-        localStorage.setItem("redirectToRegister", "true");
-        
-        setTimeout(() => {
-          router.push("/auth/google/user/register");
-        }, 3000);
-      } else {
-        toast.error("Google login failed. Please try again.");
-      }
+      // Handle other errors not caught by response handling
+      toast.error("Google login failed. Please try again.");
     } finally {
       setLoading(false);
     }
   };
+  
+   
   
   const signup = async (data: SignupData) => {
     try {
