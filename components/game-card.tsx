@@ -78,7 +78,7 @@ export default function GameCard({ game }: GameCardProps) {
               </div>
               <div>
                 <h4 className="font-medium text-sm text-muted-foreground">Price</h4>
-                <p>${game.price} per day</p>
+                <p>₹{game.price}</p>
               </div>
               <div>
                 <h4 className="font-medium text-sm text-muted-foreground">Maximum Lending Period</h4>
