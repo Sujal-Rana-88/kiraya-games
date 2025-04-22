@@ -6,6 +6,14 @@ import { useAuth } from "@/lib/auth-hooks";
 import HeroSection from "@/components/hero-section";
 import FeaturedGames from "@/components/featured-games";
 import HowItWorks from "@/components/how-it-works";
+import Navbar from "@/components/navbar";
+import Hero from "@/components/Hero";
+import Footer from "@/components/Footer";
+import About from "@/components/About";
+import Features from "@/components/Features";
+import Contact from "@/components/Contact";
+import Story from "@/components/Story";
+import AboutFeatures from "@/components/AboutFeatures";
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -36,10 +44,23 @@ export default function Home() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <HeroSection />
-      <FeaturedGames />
-      <HowItWorks />
-    </div>
+    // <div className="container mx-auto px-4 py-8">
+    //   <Navbar />
+    //   <Hero />
+    //   <About />
+    //   <Features />
+    //   <Story />
+    //   <Contact />
+    //   <Footer />
+    // </div>
+
+    <>
+      <Hero />
+      <About />
+      <Features />
+      <Story />
+      <Contact />
+      <Footer />
+      </>
   );
 }
