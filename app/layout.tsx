@@ -7,6 +7,7 @@ import Navbar from "@/components/navbar";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Metadata } from "next";
+import AIChatBot from "@/components/AIChatBot";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -43,6 +44,7 @@ export default function RootLayout({
             <Navbar />
             <main className="min-h-screen">{children}</main>
           </AuthProvider>
+          <AIChatBot />
         </ThemeProvider>
         <ToastContainer position="top-right" autoClose={3000} />
       </body>

@@ -110,6 +110,7 @@ export default function RentPage() {
 
           <div>
             <Label htmlFor="category" className="mb-2 block">Category</Label>
+            <Label htmlFor="category" className="mb-2 block">Category</Label>
             <Select value={selectedCategory} onValueChange={setSelectedCategory}>
               <SelectTrigger id="category">
                 <SelectValue placeholder="Select category" />
